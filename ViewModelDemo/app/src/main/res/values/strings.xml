@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ViewModel Demo</string>
+    <string name="click_here">Click Here</string>
 </resources>
