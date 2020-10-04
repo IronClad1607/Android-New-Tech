@@ -19,16 +19,15 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModelFactory = MainActivityViewModelFactory(0)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
+        binding.mViewModel = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.sumData.observe(this, Observer {
-            binding.tvSum.text = it.toString()
-        })
 
-        binding.btnAdd.setOnClickListener {
-            val number = binding.etNumber.text.toString().toInt()
-            binding.etNumber.text.clear()
-            viewModel.setNumbers(number)
-        }
+//        binding.btnAdd.setOnClickListener {
+//            val number = binding.etNumber.text.toString().toInt()
+//            binding.etNumber.text.clear()
+//            viewModel.setNumbers(number)
+//        }
 
         binding.btnNext.setOnClickListener {
             val nextIntent = Intent(this, CountActivity::class.java)
