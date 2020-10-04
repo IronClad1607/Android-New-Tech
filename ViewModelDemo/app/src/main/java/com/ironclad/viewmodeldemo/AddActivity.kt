@@ -10,11 +10,13 @@ class AddActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBinding
     private lateinit var viewModel: AddActivityViewModel
+    private lateinit var viewModelFactory: AddActivityViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add)
-        viewModel = ViewModelProvider(this).get(AddActivityViewModel::class.java)
+        viewModelFactory = AddActivityViewModelFactory(0)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(AddActivityViewModel::class.java)
 
         binding.tvSum.text = viewModel.sum.toString()
 
