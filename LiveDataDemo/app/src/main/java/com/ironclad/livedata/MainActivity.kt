@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         viewModelFactory = MainActivityViewModelFactory(0)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 
-        viewModel.sum.observe(this, Observer {
+        viewModel.sumData.observe(this, Observer {
             binding.tvSum.text = it.toString()
         })
 
