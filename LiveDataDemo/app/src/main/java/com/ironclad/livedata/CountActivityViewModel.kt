@@ -1,11 +1,14 @@
 package com.ironclad.livedata
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class CountActivityViewModel : ViewModel() {
 
-    var count = MutableLiveData<Int>()
+    private var count = MutableLiveData<Int>()
+    val countData: LiveData<Int>
+        get() = count
 
     init {
         count.value = 0
