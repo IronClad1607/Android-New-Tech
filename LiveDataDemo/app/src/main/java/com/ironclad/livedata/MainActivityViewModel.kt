@@ -1,16 +1,16 @@
 package com.ironclad.livedata
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel(startingTotal: Int) : ViewModel() {
-    var sum = 0;
+    var sum = MutableLiveData<Int>()
 
     init {
-        sum = startingTotal
+        sum.value = startingTotal
     }
 
-    fun addNumbers(number: Int): Int {
-        sum += number
-        return sum
+    fun setNumbers(number: Int) {
+        sum.value = (sum.value)?.plus(number)
     }
 }

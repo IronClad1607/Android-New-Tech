@@ -3,6 +3,7 @@ package com.ironclad.livedata
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ironclad.livedata.databinding.ActivityMainBinding
 
@@ -18,12 +19,14 @@ class MainActivity : AppCompatActivity() {
         viewModelFactory = MainActivityViewModelFactory(0)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 
-        binding.tvSum.text = viewModel.sum.toString()
+        viewModel.sum.observe(this, Observer {
+            binding.tvSum.text = it.toString()
+        })
 
         binding.btnAdd.setOnClickListener {
             val number = binding.etNumber.text.toString().toInt()
             binding.etNumber.text.clear()
-            binding.tvSum.text = viewModel.addNumbers(number).toString()
+            viewModel.setNumbers(number)
         }
     }
 }
