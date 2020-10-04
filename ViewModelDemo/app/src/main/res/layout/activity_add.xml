@@ -8,27 +8,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".MainActivity">
+        tools:context=".AddActivity">
 
-        <TextView
-            android:id="@+id/tvCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="Hello World!" />
-
-        <Button
-            android:id="@+id/btnClick"
+        <EditText
+            android:id="@+id/etNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="@string/click_here" />
+            android:inputType="number" />
 
         <Button
-            android:id="@+id/btnNext"
+            android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/next_activity" />
+            android:layout_marginBottom="20dp"
+            android:text="@string/add" />
+
+        <TextView
+            android:id="@+id/tvSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textSize="25sp" />
 
     </LinearLayout>
 </layout>

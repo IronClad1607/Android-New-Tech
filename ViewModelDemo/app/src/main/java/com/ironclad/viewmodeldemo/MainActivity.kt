@@ -1,5 +1,6 @@
 package com.ironclad.viewmodeldemo
 
+import android.content.Intent
 import android.database.DatabaseUtils
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnClick.setOnClickListener {
             binding.tvCount.text = viewModel.getUpdatedCount().toString()
+        }
+
+        binding.btnNext.setOnClickListener {
+            val nextIntent = Intent(this, AddActivity::class.java)
+            startActivity(nextIntent)
         }
     }
 }
