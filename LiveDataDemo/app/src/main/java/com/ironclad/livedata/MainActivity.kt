@@ -1,5 +1,6 @@
 package com.ironclad.livedata
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity() {
             val number = binding.etNumber.text.toString().toInt()
             binding.etNumber.text.clear()
             viewModel.setNumbers(number)
+        }
+
+        binding.btnNext.setOnClickListener {
+            val nextIntent = Intent(this, CountActivity::class.java)
+            startActivity(nextIntent)
         }
     }
 }
