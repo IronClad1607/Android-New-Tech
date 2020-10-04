@@ -15,6 +15,7 @@ class CountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_count)
+        binding.mViewModel = viewModel
         viewModel = ViewModelProvider(this).get(CountActivityViewModel::class.java)
 
         viewModel.count.observe(this, Observer {
