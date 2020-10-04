@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NotificationsDemo</string>
     <string name="click">Click!</string>
+    <string name="you_have_tapped_the_notification">You have tapped the Notification</string>
 </resources>
