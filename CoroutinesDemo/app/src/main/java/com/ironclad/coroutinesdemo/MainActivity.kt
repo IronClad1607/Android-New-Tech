@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnDownload.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                downloadUserData()
+            CoroutineScope(Dispatchers.Main).launch {
+                tvUserDownload.text = UserDataManager1().getTotalUserData().toString()
             }
         }
     }
