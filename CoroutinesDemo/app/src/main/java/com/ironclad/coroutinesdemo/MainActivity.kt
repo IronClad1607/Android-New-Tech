@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         btnDownload.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                tvUserDownload.text = UserDataManager1().getTotalUserData().toString()
+                tvUserDownload.text = UserDataStructured().getTotalUserCount().toString()
             }
         }
     }
