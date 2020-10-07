@@ -1,9 +1,6 @@
 package com.ironclad.coroutinesdemo
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class UserDataManager1 {
 
@@ -14,6 +11,11 @@ class UserDataManager1 {
             count = 50
         }
 
-        return 50
+        val deferred = CoroutineScope(Dispatchers.IO).async {
+            delay(3000)
+            return@async 70
+        }
+
+        return count + deferred.await()
     }
 }
