@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        mainActivityViewModel.getUserData()
+//        mainActivityViewModel.getUserData()
 
         mainActivityViewModel.users.observe(this, Observer { myUsers ->
             myUsers.forEach {
