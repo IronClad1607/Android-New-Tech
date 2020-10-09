@@ -6,10 +6,12 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ironclad.roomdemo.R
 import com.ironclad.roomdemo.data.db.SubscriberDatabase
 import com.ironclad.roomdemo.data.repo.SubscriberRepository
 import com.ironclad.roomdemo.databinding.ActivityMainBinding
+import com.ironclad.roomdemo.ui.adaters.SubscriberAdapter
 import com.ironclad.roomdemo.ui.viewmodels.SubscriberViewModel
 import com.ironclad.roomdemo.ui.viewmodels.SubscriberViewModelFactory
 
@@ -28,12 +30,20 @@ class MainActivity : AppCompatActivity() {
         binding.mViewModel = subscriberViewModel
         binding.lifecycleOwner = this
 
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView() {
+        binding.rvSubscribers.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
         displaySubscribersList()
     }
 
     private fun displaySubscribersList() {
         subscriberViewModel.subscribers.observe(this, Observer {
             Log.d("PUI", it.toString())
+            binding.rvSubscribers.adapter = SubscriberAdapter(it)
         })
     }
 }
