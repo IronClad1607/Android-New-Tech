@@ -1,4 +1,4 @@
-package com.ironclad.roomdemo.db
+package com.ironclad.roomdemo.data.db
 
 import android.content.Context
 import androidx.room.Database
