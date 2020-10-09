@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="mViewModel"
+            type="com.ironclad.roomdemo.ui.viewmodels.SubscriberViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +26,8 @@
             android:ems="10"
             android:hint="@string/subscriber_s_name"
             android:importantForAutofill="no"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:text="@={mViewModel.inputName}" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -31,7 +39,8 @@
             android:ems="10"
             android:hint="@string/subscriber_s_email"
             android:importantForAutofill="no"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:text="@={mViewModel.inputEmail}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/save"
+                android:onClick="@{()-> mViewModel.saveOrUpdate()}"
+                android:text="@={mViewModel.saveOrUpdateButtonText}"
                 tools:ignore="ButtonStyle" />
 
             <Button
@@ -51,14 +61,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/clear_all"
+                android:onClick="@{()-> mViewModel.clearAllOrDelete()}"
+                android:text="@={mViewModel.clearAllOrDeleteButtonText}"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubscribers"
             android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_margin="5dp" />
     </LinearLayout>
 </layout>
