@@ -1,7 +1,8 @@
-package com.ironclad.roomdemo
+package com.ironclad.roomdemo.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ironclad.roomdemo.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

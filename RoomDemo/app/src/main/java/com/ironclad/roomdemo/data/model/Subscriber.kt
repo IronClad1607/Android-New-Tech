@@ -1,4 +1,4 @@
-package com.ironclad.roomdemo.data.db
+package com.ironclad.roomdemo.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

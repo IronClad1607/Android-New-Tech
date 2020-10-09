@@ -2,6 +2,7 @@ package com.ironclad.roomdemo.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.ironclad.roomdemo.data.model.Subscriber
 
 @Dao
 interface SubscriberDao {
