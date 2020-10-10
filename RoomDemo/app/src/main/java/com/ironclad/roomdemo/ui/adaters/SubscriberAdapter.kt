@@ -10,7 +10,6 @@ import com.ironclad.roomdemo.data.model.Subscriber
 import com.ironclad.roomdemo.databinding.SubscriberListItemBinding
 
 class SubscriberAdapter(
-    private val subscribers: List<Subscriber>,
     private val clickListener: (Subscriber) -> Unit
 ) :
     RecyclerView.Adapter<SubscriberAdapter.SubscriberViewHolder>() {
@@ -28,6 +27,8 @@ class SubscriberAdapter(
 
     }
 
+    private val subscribers = ArrayList<Subscriber>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriberViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: SubscriberListItemBinding =
@@ -40,4 +41,9 @@ class SubscriberAdapter(
     }
 
     override fun getItemCount(): Int = subscribers.size
+
+    fun setList(subscribersList: List<Subscriber>) {
+        subscribers.clear()
+        subscribers.addAll(subscribersList)
+    }
 }
