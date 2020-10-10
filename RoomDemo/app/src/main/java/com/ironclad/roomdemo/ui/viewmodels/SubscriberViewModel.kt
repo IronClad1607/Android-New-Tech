@@ -1,5 +1,6 @@
 package com.ironclad.roomdemo.ui.viewmodels
 
+import android.util.Patterns
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.LiveData
@@ -40,18 +41,27 @@ class SubscriberViewModel(private val repo: SubscriberRepository) : ViewModel(),
     }
 
     fun saveOrUpdate() {
-        if (isUpdateOrDelete) {
-            subscriberToUpdateOrDelete.name = inputName.value!!
-            subscriberToUpdateOrDelete.email = inputEmail.value!!
 
-            update(subscriberToUpdateOrDelete)
+        if (inputName.value == null) {
+            statusMessage.value = Event("Please Enter Name")
+        } else if (inputEmail.value == null) {
+            statusMessage.value = Event("Please Enter Email")
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(inputEmail.value!!).matches()) {
+            statusMessage.value = Event("Please Enter Valid Email")
         } else {
-            val name = inputName.value!!
-            val email = inputEmail.value!!
+            if (isUpdateOrDelete) {
+                subscriberToUpdateOrDelete.name = inputName.value!!
+                subscriberToUpdateOrDelete.email = inputEmail.value!!
 
-            insert(Subscriber(0, name, email))
-            inputName.value = null
-            inputEmail.value = null
+                update(subscriberToUpdateOrDelete)
+            } else {
+                val name = inputName.value!!
+                val email = inputEmail.value!!
+
+                insert(Subscriber(0, name, email))
+                inputName.value = null
+                inputEmail.value = null
+            }
         }
     }
 
@@ -85,7 +95,7 @@ class SubscriberViewModel(private val repo: SubscriberRepository) : ViewModel(),
             clearAllOrDeleteButtonText.value = "Clear All"
             statusMessage.value = Event("Subscriber Updated Successful")
         } else {
-
+            statusMessage.value = Event("Error Occurred")
         }
     }
 
