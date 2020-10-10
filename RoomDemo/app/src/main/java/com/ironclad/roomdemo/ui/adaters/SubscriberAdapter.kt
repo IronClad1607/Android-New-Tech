@@ -9,15 +9,21 @@ import com.ironclad.roomdemo.R
 import com.ironclad.roomdemo.data.model.Subscriber
 import com.ironclad.roomdemo.databinding.SubscriberListItemBinding
 
-class SubscriberAdapter(private val subscribers: List<Subscriber>) :
+class SubscriberAdapter(
+    private val subscribers: List<Subscriber>,
+    private val clickListener: (Subscriber) -> Unit
+) :
     RecyclerView.Adapter<SubscriberAdapter.SubscriberViewHolder>() {
 
     class SubscriberViewHolder(val binding: SubscriberListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(subscriber: Subscriber) {
+        fun bind(subscriber: Subscriber, clickListener: (Subscriber) -> Unit) {
             binding.tvName.text = subscriber.name
             binding.tvEmail.text = subscriber.email
+            binding.llSub.setOnClickListener {
+                clickListener(subscriber)
+            }
         }
 
     }
@@ -30,7 +36,7 @@ class SubscriberAdapter(private val subscribers: List<Subscriber>) :
     }
 
     override fun onBindViewHolder(holder: SubscriberViewHolder, position: Int) {
-        holder.bind(subscribers[position])
+        holder.bind(subscribers[position], clickListener)
     }
 
     override fun getItemCount(): Int = subscribers.size
