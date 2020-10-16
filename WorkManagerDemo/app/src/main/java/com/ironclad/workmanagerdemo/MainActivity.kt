@@ -2,9 +2,8 @@ package com.ironclad.workmanagerdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import androidx.work.Worker
+import androidx.lifecycle.Observer
+import androidx.work.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,10 +17,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setOneTimeWorkRequest() {
-        val oneTimeWorkRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java)
+        val workManager = WorkManager.getInstance(applicationContext)
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        WorkManager.getInstance(applicationContext)
-            .enqueue(oneTimeWorkRequest)
+        val oneTimeWorkRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java)
+            .setConstraints(constraints)
+            .build()
+
+        workManager.enqueue(oneTimeWorkRequest)
+        workManager.getWorkInfoByIdLiveData(oneTimeWorkRequest.id).observe(this, Observer {
+            textView.text = it.state.name
+        })
     }
 }
