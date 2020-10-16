@@ -2,6 +2,7 @@ package com.ironclad.workmanagerdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.work.*
@@ -9,9 +10,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         const val KEY = "key_count"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val workManager = WorkManager.getInstance(applicationContext)
 
         val data = Data.Builder()
-            .putInt(KEY,125)
+            .putInt(KEY, 125)
             .build()
 
 
@@ -33,18 +35,29 @@ class MainActivity : AppCompatActivity() {
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        val oneTimeWorkRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java)
+        val filteringRequest = OneTimeWorkRequest.Builder(FilteringWorker::class.java)
+            .build()
+
+        val compressingRequest = OneTimeWorkRequest.Builder(CompressingWorker::class.java)
+            .build()
+
+        val uploadRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java)
             .setConstraints(constraints)
             .setInputData(data)
             .build()
 
-        workManager.enqueue(oneTimeWorkRequest)
-        workManager.getWorkInfoByIdLiveData(oneTimeWorkRequest.id).observe(this, Observer {
+        workManager.beginWith(filteringRequest)
+            .then(compressingRequest)
+            .then(uploadRequest)
+            .enqueue()
+
+        workManager.getWorkInfoByIdLiveData(uploadRequest.id).observe(this, Observer {
             textView.text = it.state.name
-            if(it.state.isFinished){
+            if (it.state.isFinished) {
                 val data = it.outputData
                 val message = data.getString(UploadWorker.KEY_WORKER)
-                Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+                Log.d("PUI", message!!)
+                Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
         })
     }

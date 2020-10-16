@@ -1,5 +1,6 @@
 package com.ironclad.workmanagerdemo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.work.Data
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class UploadWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
+    @SuppressLint("SimpleDateFormat")
     override fun doWork(): Result {
         return try {
             val count  = inputData.getInt(MainActivity.KEY,0)
@@ -25,7 +27,7 @@ class UploadWorker(context: Context, params: WorkerParameters) : Worker(context,
                 .putString(KEY_WORKER,currentDate)
                 .build()
 
-            Result.success()
+            Result.success(outputData)
         } catch (e: Exception) {
             Result.failure()
         }
