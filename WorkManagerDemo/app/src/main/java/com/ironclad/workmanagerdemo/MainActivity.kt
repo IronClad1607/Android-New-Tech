@@ -46,7 +46,14 @@ class MainActivity : AppCompatActivity() {
             .setInputData(data)
             .build()
 
-        workManager.beginWith(filteringRequest)
+        val downloadRequest = OneTimeWorkRequest.Builder(DownloadWorker::class.java)
+            .build()
+
+        val parallelWorks = mutableListOf<OneTimeWorkRequest>()
+        parallelWorks.add(downloadRequest)
+        parallelWorks.add(filteringRequest)
+
+        workManager.beginWith(parallelWorks)
             .then(compressingRequest)
             .then(uploadRequest)
             .enqueue()

@@ -6,11 +6,11 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import java.lang.Exception
 
-class FilteringWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
+class DownloadWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
     override fun doWork(): Result {
         return try {
             for (i in 0..3000){
-                Log.d("PUI","Filtering $i")
+                Log.d("PUI","Downloading $i")
             }
 
             Result.success()
