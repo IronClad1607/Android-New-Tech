@@ -2,16 +2,25 @@ package com.ironclad.daggerdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var smartPhone: SmartPhone
+
+    @Inject
+    lateinit var smartPhone: SmartPhone
+
+    @Inject
+    lateinit var memoryCard: MemoryCard
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         DaggerSmartPhoneComponent.create()
-                .getSmartPhone()
-                .makeACallWithRecording()
+                .inject(this)
+
+        smartPhone.makeACallWithRecording()
+        memoryCard.getSpaceAvailability()
+
 
 
 //        val smartPhone = SmartPhone(Battery(), SIMCard(ServiceProvider()), MemoryCard())
