@@ -1,8 +1,9 @@
 package com.ironclad.daggerdemo
 
 import android.util.Log
+import javax.inject.Inject
 
-class Battery {
+class Battery @Inject constructor() {
     init {
         Log.d("PUI","Battery Constructed")
     }

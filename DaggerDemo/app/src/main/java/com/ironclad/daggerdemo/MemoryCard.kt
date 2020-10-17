@@ -1,8 +1,9 @@
 package com.ironclad.daggerdemo
 
 import android.util.Log
+import javax.inject.Inject
 
-class MemoryCard {
+class MemoryCard @Inject constructor() {
     init {
         Log.d("PUI", "Memory Card Constructed")
     }

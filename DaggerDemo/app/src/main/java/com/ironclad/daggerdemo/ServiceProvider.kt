@@ -1,8 +1,9 @@
 package com.ironclad.daggerdemo
 
 import android.util.Log
+import javax.inject.Inject
 
-class ServiceProvider {
+class ServiceProvider @Inject constructor(){
     init {
         Log.d("PUI", "Service Provider Constructed")
     }
