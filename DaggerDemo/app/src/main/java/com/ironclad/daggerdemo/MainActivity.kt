@@ -14,20 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        DaggerSmartPhoneComponent.create()
-//                .inject(this)
-//
-//        smartPhone.makeACallWithRecording()
-//        memoryCard.getSpaceAvailability()
-
-        DaggerSmartPhoneComponent.builder()
-            .memoryCardModule(MemoryCardModule(1000))
-            .build()
+        (application as SmartPhoneApplication).smartPhoneComponent
             .inject(this)
-
-
-//        val smartPhone = SmartPhone(Battery(), SIMCard(ServiceProvider()), MemoryCard())
-//        smartPhone.makeACallWithRecording()
     }
 }
