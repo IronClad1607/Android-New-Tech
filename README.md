@@ -14,3 +14,6 @@ In this repository are the demo code for the new things I learnt. They are:
 - Naviagation Architecture
 - Room Database
 - Notifications
+- MVVM
+- Dagger
+- Unit Testing
